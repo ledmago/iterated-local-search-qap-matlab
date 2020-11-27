@@ -107,7 +107,7 @@ end
 
 function newSol = perturbation(sol,n)
 newSol = sol;
-    for i=1:2
+    for i=1:3
         randomIndex1=randi([1,n]);
         randomIndex2=randi([1,n]);
         temp = newSol(randomIndex1);
