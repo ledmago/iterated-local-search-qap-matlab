@@ -45,7 +45,7 @@ current = BestLocalSearch(StartingSolution,n,distance,flow)
 while(iterationNumber < 500)
 
 iterationNumber = iterationNumber + 1;
-s = randperm(n);
+s = perturbation(current, n);
 sprime = BestLocalSearch(s,n,distance,flow)
     if(CalculateCost(sprime,n,distance,flow) < CalculateCost(current,n,distance,flow))
         current = sprime
@@ -105,15 +105,30 @@ function z = CalculateCost(sol,n,distance,flow)
        end
 end
 
+function newSol = perturbation(sol,n)
+newSol = sol;
+    for i=1:2
+        randomIndex1=randi([1,n]);
+        randomIndex2=randi([1,n]);
+        temp = newSol(randomIndex1);
+        newSol(randomIndex1) = newSol(randomIndex2)
+        newSol(randomIndex2) = temp;
+    end
+end
 
 
- def perturbation(self):
-        k = rd.randint(2, self.data.n)
-        indexes = np.random.choice(np.arange(self.data.n), k, replace=False)
-        shuffled_indexes = np.random.permutation(indexes)
-        new_solution = self.solution.copy()
-        new_solution[indexes] = self.solution[shuffled_indexes]
-        return new_solution
+
+// Best Solution cost 224416, Iteration = 115current =
+
+ //   8    1    6    2   11   10    3    5    9    7   12    4
+
+//  def perturbation(self):
+//     k = rd.randint(2, self.data.n) // 2 ie n arası random sayı
+//     indexes = np.random.choice(np.arange(self.data.n), k, replace=False)
+//     shuffled_indexes = np.random.permutation(indexes)
+//     new_solution = self.solution.copy()
+//     new_solution[indexes] = self.solution[shuffled_indexes]
+//     return new_solution
 
 
-https://github.com/Lolik-Bolik/Quadratic_Assign_Problem/blob/master/algorithms/iterated_local_search.py
+// https://github.com/Lolik-Bolik/Quadratic_Assign_Problem/blob/master/algorithms/iterated_local_search.py
