@@ -5,7 +5,7 @@ tic
 
 distance=[
   0 27 85  2  1 15 11 35 11 20 21 61
- 27  0 80 58 21 76 72 44 85 94 90 51
+ 27  0 80 58 21 76  72 44 85 94 90 51
  85 80  0  3 48 29 90 66 41 15 83 96
   2 58  3  0 74 45 65 40 54 83 14 71
   1 21 48 74  0 77 36 53 37 26 87 76
@@ -42,7 +42,7 @@ distance=[
 
 current = BestLocalSearch(StartingSolution,n,distance,flow)
 
-while(iterationNumber < 500)
+while(iterationNumber < 1000)
 
 iterationNumber = iterationNumber + 1;
 s = perturbation(current, n);
@@ -51,11 +51,15 @@ sprime = BestLocalSearch(s,n,distance,flow)
         current = sprime
     end
 end
-end
 
 
-printf("Best Solution cost %d, Iteration = %d", CalculateCost(current,n,distance,flow), iterationNumber)
-current
+disp("Best Solution cost ");
+costofCurrent = CalculateCost(current,n,distance,flow);
+disp(costofCurrent);
+disp("Iteration Number")
+disp(iterationNumber);
+
+
 
 
 	
@@ -105,6 +109,7 @@ function z = CalculateCost(sol,n,distance,flow)
        end
 end
 
+% Perturbation with Swap of 3 elements
 function newSol = perturbation(sol,n)
 newSol = sol;
     for i=1:3
@@ -115,20 +120,3 @@ newSol = sol;
         newSol(randomIndex2) = temp;
     end
 end
-
-
-
-// Best Solution cost 224416, Iteration = 115current =
-
- //   8    1    6    2   11   10    3    5    9    7   12    4
-
-//  def perturbation(self):
-//     k = rd.randint(2, self.data.n) // 2 ie n arası random sayı
-//     indexes = np.random.choice(np.arange(self.data.n), k, replace=False)
-//     shuffled_indexes = np.random.permutation(indexes)
-//     new_solution = self.solution.copy()
-//     new_solution[indexes] = self.solution[shuffled_indexes]
-//     return new_solution
-
-
-// https://github.com/Lolik-Bolik/Quadratic_Assign_Problem/blob/master/algorithms/iterated_local_search.py
